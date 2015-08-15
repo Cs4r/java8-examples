@@ -7,7 +7,6 @@ import java.util.TreeMap;
 /**
  * Oracle JDK 8 MOOC Lesson 1 homework
  * 
- * @author Speakjava (simon.ritter@oracle.com)
  * @author cs4r
  */
 public class Lesson1 {
