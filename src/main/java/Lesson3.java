@@ -67,24 +67,22 @@ public class Lesson3 {
 	 *            Whether to run in parallel
 	 * @return Matrix of Levenshtein distances
 	 */
-	static int[][] computeLevenshtein(List<String> wordList, boolean parallel) {
+	static int[][] computeLevenshtein(List<String> wordList, final boolean parallel) {
 		final int LIST_SIZE = wordList.size();
 		int[][] distances = new int[LIST_SIZE][LIST_SIZE];
 
-		IntStream rows = IntStream.range(0, LIST_SIZE).parallel();
-
-		if (!parallel) {
-			rows = rows.sequential();
-		}
-
-		rows.forEach(row -> {
+		Supplier<IntStream> intsSupplier = () -> {
 			IntStream cols = IntStream.range(0, LIST_SIZE).parallel();
 
 			if (!parallel) {
 				cols = cols.sequential();
 			}
 
-			cols.forEach(col -> {
+			return cols;
+		};
+
+		intsSupplier.get().forEach(row -> {
+			intsSupplier.get().forEach(col -> {
 				distances[row][col] = Levenshtein.lev(wordList.get(row), wordList.get(col));
 			});
 		});
@@ -127,7 +125,7 @@ public class Lesson3 {
 		measure("Sequential", () -> computeLevenshtein(wordList, false));
 		measure("Parallel", () -> computeLevenshtein(wordList, true));
 
-		measure("Sequential", () -> processWords(wordList, false));
-		measure("Parallel", () -> processWords(wordList, true));
+		// measure("Sequential", () -> processWords(wordList, false));
+		// measure("Parallel", () -> processWords(wordList, true));
 	}
 }
