@@ -72,13 +72,13 @@ public class Lesson3 {
 		int[][] distances = new int[LIST_SIZE][LIST_SIZE];
 
 		Supplier<IntStream> intsSupplier = () -> {
-			IntStream cols = IntStream.range(0, LIST_SIZE).parallel();
+			IntStream intStream = IntStream.range(0, LIST_SIZE).parallel();
 
 			if (!parallel) {
-				cols = cols.sequential();
+				intStream = intStream.sequential();
 			}
 
-			return cols;
+			return intStream;
 		};
 
 		intsSupplier.get().forEach(row -> {
