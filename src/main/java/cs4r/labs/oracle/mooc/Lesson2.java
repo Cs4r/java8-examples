@@ -1,3 +1,4 @@
+package cs4r.labs.oracle.mooc;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

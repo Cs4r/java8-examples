@@ -1,3 +1,4 @@
+package cs4r.labs.oracle.mooc;
 
 /**
  * Copyright © 2014, Oracle and/or its affiliates. All rights reserved.
